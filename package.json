@@ -1,4 +1,6 @@
 {
+  "name": "react-myreads",
+  "version": "1.0.0",
   "dependencies": {
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
@@ -6,12 +8,20 @@
     "react-router-dom": "^4.1.2"
   },
   "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^3.19.0",
+    "eslint-config-react-app": "^1.0.5",
+    "eslint-plugin-flowtype": "^2.33.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^5.0.1",
+    "eslint-plugin-react": "^7.0.1",
     "react-scripts": "0.9.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint ./**/*.js"
   }
 }
