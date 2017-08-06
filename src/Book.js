@@ -1,8 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Book = (props) => {
+  const {id, title, thumbnail, shelf, authors} = props;
+
   function changeShelf(event) {
-    props.onShelfChange({ id: props.id }, event.target.value);
+    props.onShelfChange({ id }, event.target.value);
   }
 
   return (
@@ -11,11 +14,11 @@ const Book = (props) => {
         <div className="book-cover" style={{
             width: 128,
             height: 193,
-            backgroundImage: `url(${props.thumbnail})`
+            backgroundImage: `url(${thumbnail})`
           }}>
         </div>
         <div className="book-shelf-changer">
-          <select onChange={changeShelf} value={props.shelf}>
+          <select onChange={changeShelf} value={shelf}>
             <option value="" disabled>Move to...</option>
             <option value="currentlyReading">Currently Reading</option>
             <option value="wantToRead">Want to Read</option>
@@ -24,12 +27,21 @@ const Book = (props) => {
           </select>
         </div>
       </div>
-      <div className="book-title">{props.title}</div>
-      {props.authors && props.authors.map(author => (
+      <div className="book-title">{title}</div>
+      {authors && authors.map(author => (
         <div key={author} className="book-authors">{author}</div>
       ))}
     </div>
   );
 };
+
+Book.propTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  thumbnail: PropTypes.string.isRequired,
+  shelf: PropTypes.string.isRequired,
+  authors: PropTypes.array.isRequired,
+  onShelfChange: PropTypes.func.isRequired
+}
 
 export default Book;
