@@ -16,7 +16,7 @@ const Book = (props) => {
         </div>
         <div className="book-shelf-changer">
           <select onChange={changeShelf} value={props.shelf}>
-            <option value="none" disabled>Move to...</option>
+            <option value="" disabled>Move to...</option>
             <option value="currentlyReading">Currently Reading</option>
             <option value="wantToRead">Want to Read</option>
             <option value="read">Read</option>
@@ -25,7 +25,7 @@ const Book = (props) => {
         </div>
       </div>
       <div className="book-title">{props.title}</div>
-      {props.authors.map(author => (
+      {props.authors && props.authors.map(author => (
         <div key={author} className="book-authors">{author}</div>
       ))}
     </div>
