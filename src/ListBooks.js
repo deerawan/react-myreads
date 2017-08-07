@@ -23,17 +23,17 @@ class ListBooks extends Component {
           <div>
             <BookShelf
               title="Currently Reading"
-              books={bookShelves.currentlyReading}
+              books={bookShelves.currentlyReading || []}
               onShelfChange={this.props.onShelfChange}
             />
             <BookShelf
               title="Want to Read"
-              books={bookShelves.wantToRead}
+              books={bookShelves.wantToRead || []}
               onShelfChange={this.props.onShelfChange}
             />
             <BookShelf
               title="Read"
-              books={bookShelves.read}
+              books={bookShelves.read || []}
               onShelfChange={this.props.onShelfChange}
             />
           </div>

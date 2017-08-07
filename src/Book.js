@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Rating from 'react-rating';
 
 const Book = (props) => {
-  const {id, title, thumbnail, shelf, authors} = props;
+  const {id, title, thumbnail, shelf, authors, rating} = props;
 
   function changeShelf(event) {
     props.onShelfChange({ id }, event.target.value);
@@ -31,6 +32,14 @@ const Book = (props) => {
       {authors && authors.map(author => (
         <div key={author} className="book-authors">{author}</div>
       ))}
+      <div>
+        <Rating
+          initialRate={rating}
+          empty="fa fa-star-o"
+          full="fa fa-star"
+          readonly
+        />
+      </div>
     </div>
   );
 };
