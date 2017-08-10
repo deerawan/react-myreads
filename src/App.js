@@ -39,11 +39,34 @@ class BooksApp extends React.Component {
     });
   }
 
+  bulkUpdateShelf = (updatedBooks, shelf) => {
+    const updatePromises = updatedBooks.map(book => booksAPI.update(book, shelf));
+
+    return Promise
+      .all(updatePromises)
+      .then(response => {
+        this.setState(state => ({
+          books: state.books.map(book => {
+            const bookExistInUpdatedBooks = updatedBooks.find(checkedBook => checkedBook.id === book.id);
+            if (bookExistInUpdatedBooks) {
+              book.shelf = shelf;
+            }
+
+            return book;
+          })
+        }))
+      })
+  }
+
   render() {
     return (
       <div className="app">
         <Route exact path='/' render={() =>
-          <ListBooks books={this.state.books} onShelfChange={this.updateShelf} />
+          <ListBooks
+            books={this.state.books}
+            onShelfChange={this.updateShelf}
+            onBulkShelfChange={this.bulkUpdateShelf}
+          />
         } />
         <Route path='/search' render={() =>
           <SearchBooks

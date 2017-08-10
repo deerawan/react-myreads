@@ -13,6 +13,7 @@ const BookShelf = (props) => {
         shelf={book.shelf}
         rating={book.ratingsCount}
         onShelfChange={props.onShelfChange}
+        onBookChecked={props.onBookChecked}
       />
     </li>
   ));
