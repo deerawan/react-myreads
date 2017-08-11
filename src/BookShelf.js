@@ -9,7 +9,7 @@ const BookShelf = (props) => {
         id={book.id}
         title={book.title}
         authors={book.authors}
-        thumbnail={book.imageLinks.thumbnail}
+        thumbnail={book.imageLinks && book.imageLinks.thumbnail}
         shelf={book.shelf}
         rating={book.ratingsCount}
         onShelfChange={props.onShelfChange}

@@ -5,32 +5,14 @@ import ShelfSelect from './ShelfSelect';
 import PropTypes from 'prop-types';
 
 class ListBooks extends Component {
-  state = {
-    checkedBooks: []
-  }
-
-  onBookChecked = (bookId, checked) => {
-    this.setState(state => {
-      const existInCheckedBooks = state.checkedBooks.find(book => book.id === bookId);
-      if (!existInCheckedBooks && checked === true) {
-        const checkedBookWithInfo = this.props.books.find(book => book.id === bookId);
-        return {
-          checkedBooks: state.checkedBooks.concat([checkedBookWithInfo])
-        }
-      }
-
-      if (checked === false) {
-        return {
-          checkedBooks: state.checkedBooks.filter(book => book.id !== bookId)
-        }
-      }
-    });
-  }
-
-  onBulkShelfChange = (event) => {
+  bulkShelfChange = (event) => {
     const targetShelf = event.target.value;
-    this.setState({ checkedBooks: [] });
-    this.props.onBulkShelfChange(this.state.checkedBooks, targetShelf);
+    this.props.onBulkShelfChange(targetShelf);
+  }
+
+  checkBook = (bookId, checkedStatus) => {
+    const checkedBookWithInfo = this.props.books.find(book => book.id === bookId);
+    this.props.onBookChecked(checkedBookWithInfo, checkedStatus);
   }
 
   render() {
@@ -51,8 +33,8 @@ class ListBooks extends Component {
       <div className="list-books">
         <div className="list-books-title">
           <h1>MyReads</h1>
-          <div style={{float: "right", position: "relative", bottom: "15px", right: "10px"}}>
-            <ShelfSelect onChange={this.onBulkShelfChange} value="" />
+          <div className="bulk-shelf-changer">
+            <ShelfSelect onChange={this.bulkShelfChange} />
           </div>
         </div>
         <div className="list-books-content">
@@ -61,19 +43,19 @@ class ListBooks extends Component {
               title="Currently Reading"
               books={bookShelves.currentlyReading}
               onShelfChange={this.props.onShelfChange}
-              onBookChecked={this.onBookChecked}
+              onBookChecked={this.checkBook}
             />
             <BookShelf
               title="Want to Read"
               books={bookShelves.wantToRead}
               onShelfChange={this.props.onShelfChange}
-              onBookChecked={this.onBookChecked}
+              onBookChecked={this.checkBook}
             />
             <BookShelf
               title="Read"
               books={bookShelves.read}
               onShelfChange={this.props.onShelfChange}
-              onBookChecked={this.onBookChecked}
+              onBookChecked={this.checkBook}
             />
           </div>
         </div>

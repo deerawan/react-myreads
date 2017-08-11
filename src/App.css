@@ -172,3 +172,19 @@ body, .app {
   text-align: center;
   font-size: 0.8em;
 }
+
+/* bulk shelf select */
+
+.bulk-shelf-changer {
+  float: right;
+  position: relative;
+  right: 10px;
+}
+
+.list-books .bulk-shelf-changer {
+  bottom: 15px;
+}
+
+.search-books .bulk-shelf-changer {
+  bottom: 18px;
+}

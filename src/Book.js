@@ -47,11 +47,10 @@ const Book = (props) => {
 Book.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  thumbnail: PropTypes.string.isRequired,
-  shelf: PropTypes.string.isRequired,
+  thumbnail: PropTypes.string,
   authors: PropTypes.array.isRequired,
   onShelfChange: PropTypes.func.isRequired,
-  onBookChecked: PropTypes.func.isRequired
+  onBookChecked: PropTypes.func
 };
 
 export default Book;

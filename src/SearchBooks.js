@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as booksAPI from './BooksAPI';
 import { Link } from 'react-router-dom';
 import Book from './Book';
+import ShelfSelect from './ShelfSelect';
 import PropTypes from 'prop-types';
 
 class SearchBooks extends Component {
@@ -11,9 +12,20 @@ class SearchBooks extends Component {
 
   changeShelf = (updatedBook, shelf) => {
     const bookWithCompleteInfo = this.state.searchResult.find(book => book.id === updatedBook.id);
+
     if (bookWithCompleteInfo) {
       this.props.onShelfChange(bookWithCompleteInfo, shelf);
     }
+  }
+
+  bulkShelfChange = (event) => {
+    const targetShelf = event.target.value;
+    this.props.onBulkShelfChange(targetShelf);
+  }
+
+  checkBook = (bookId, checkedStatus) => {
+    const checkedBookWithInfo = this.state.searchResult.find(book => book.id === bookId);
+    this.props.onBookChecked(checkedBookWithInfo, checkedStatus);
   }
 
   search = (query) => {
@@ -41,9 +53,10 @@ class SearchBooks extends Component {
           id={book.id}
           title={book.title}
           authors={book.authors}
-          thumbnail={book.imageLinks.thumbnail}
+          thumbnail={book.imageLinks && book.imageLinks.thumbnail}
           shelf={book.shelf}
           onShelfChange={this.changeShelf}
+          onBookChecked={this.checkBook}
         />
       </li>
     ));
@@ -66,6 +79,9 @@ class SearchBooks extends Component {
                 placeholder="Search by title or author"
                 onChange={(event) => this.search(event.target.value)}
               />
+          </div>
+          <div className="bulk-shelf-changer">
+            <ShelfSelect onChange={this.bulkShelfChange} />
           </div>
         </div>
         <div className="search-books-results">
