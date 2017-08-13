@@ -70,7 +70,6 @@ class BooksApp extends React.Component {
             const existInLibrary = state.books.find(book => book.id === checkedBook.id);
             return existInLibrary ? false : true;
           });
-
           const newBooksWithUpdatedShelf = newBooks.map(newBook => {
             newBook.shelf = shelf;
             return newBook;
@@ -95,6 +94,12 @@ class BooksApp extends React.Component {
       })
   }
 
+  /**
+   * Check/tick the book
+   *
+   * @param {Object} checkedBook
+   * @param {boolean} checkedStatus - true if checked, otherwise false
+   */
   checkBook = (checkedBook, checkedStatus) => {
     this.setState(state => {
       const existInCheckedBooks = state.checkedBooks.find(book => book.id === checkedBook.id);
