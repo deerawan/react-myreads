@@ -1,13 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
+import ListBook from '../ListBooks';
 import BookShelf from '../BookShelf';
-import Book from '../Book';
 
-describe('<BookShelf />', function() {
+describe('<ListBook />', function() {
   const mockOnShelfChange = jest.fn();
-  const mockBookChecked = jest.fn();
-  const title = 'Current Reading';
+  const mockOnBulkShelfChange = jest.fn();
+  const mockOnBookChecked = jest.fn();
   const books = [
     {
       id: '1',
@@ -22,26 +22,26 @@ describe('<BookShelf />', function() {
       title: 'batman forever',
       authors: ['bruce wayne'],
       thumbnail: null,
-      shelf: 'read',
+      shelf: 'currentlyReading',
       rating: 9
     }
   ];
 
   const component = shallow(
-    <BookShelf
-      title={title}
+    <ListBook
       books={books}
       onShelfChange={mockOnShelfChange}
-      onBookChecked={mockBookChecked}
+      onBulkShelfChange={mockOnBulkShelfChange}
+      onBookChecked={mockOnBookChecked}
     />
   );
 
-  it('has book shelf title', () => {
-    const bookCover = component.find('.bookshelf-title');
-    expect(bookCover).toHaveLength(1);
+  it('has page title', () => {
+    expect(component.contains('MyReads')).toEqual(true);
   });
 
-  it('has two book components', () => {
-    expect(component.find(Book)).toHaveLength(2);
+  it('displays three book shelves', () => {
+    const shelves = component.find(BookShelf);
+    expect(shelves).toHaveLength(3);
   });
 });
