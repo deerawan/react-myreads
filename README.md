@@ -2,6 +2,13 @@
 
 A react application to manage books library
 
+## Features
+- Display books
+- Shelf Update
+- Bulk Shelf Update
+- Display rating
+- Search
+
 ## Install
 After clone this repository, run command below
 ```
